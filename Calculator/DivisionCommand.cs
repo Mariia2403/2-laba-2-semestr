@@ -9,25 +9,35 @@ namespace Calculator
     internal class DivisionCommand :ICommand
     {
         CalculationOperations _operation;
-        private long _previousResult;
-
-        public DivisionCommand(CalculationOperations operations) 
+       
+        private readonly double _a;
+        private readonly double _b;
+        public DivisionCommand(CalculationOperations operations, double a, double b) 
         {
         _operation = operations;
+            _a = a;
+            _b = b;
         }
 
         public void Execute()
         {
             if (_operation.CanDivide()) // Перевіряємо ділення на 0
             {
-                _previousResult = _operation.GetResult();
+               
+                _operation.SetValues(_a, _b);
                 _operation.Division();
+
             }
         }
 
         public void Undo()
         {
-            _operation.SetResult(_previousResult);
+            _operation.ReturnPreviousValue();
+        }
+
+        public void Redo()
+        {
+            Execute();
         }
     }
 }

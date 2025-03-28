@@ -19,6 +19,11 @@ namespace Calculator
         {
         }
 
+        public void Redo()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Undo()
         {
             throw new NotImplementedException();

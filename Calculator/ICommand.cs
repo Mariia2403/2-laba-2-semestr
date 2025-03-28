@@ -10,5 +10,7 @@ namespace Calculator
     {
         void Execute(); 
         void Undo();    
+
+        void Redo();
     }
 }

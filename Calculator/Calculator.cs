@@ -23,15 +23,5 @@ namespace Calculator
             _redoStack.Clear(); //Clear Redo after new event
         }
 
-        public void Undo()
-        {
-
-
-        }
-
-        public void Redo()
-        {
-
-        }
     }
 }

@@ -6,25 +6,31 @@ namespace Calculator
     internal class AddCommand : ICommand
     {
         private CalculationOperations _operation;
-        private long _previousResult; // Збереження попереднього результату
-
-        // private string _operand;
-        public AddCommand(CalculationOperations operation)
+        private readonly double _a;
+        private readonly double _b;
+     
+        public AddCommand(CalculationOperations operation, double a, double b)
         {
             _operation = operation;
-           // _operand = operand;
+            _a = a;
+            _b = b;
+          
         }
         public void Execute()
         {
-            // numForOperation.SetOperand(_operand);
-            _previousResult = _operation.GetResult(); // Зберігаємо попередній стан
-
+          
+            _operation.SetValues(_a, _b);
             _operation.Addition();
         }
 
         public void Undo()
         {
-            _operation.SetResult(_previousResult); // Повертаємо попереднє значення
+            _operation.ReturnPreviousValue();
+        }
+
+        public void Redo()
+        {
+            Execute();
         }
     }
 }

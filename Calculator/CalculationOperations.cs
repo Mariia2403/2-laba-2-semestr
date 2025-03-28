@@ -4,26 +4,27 @@ namespace Calculator
 {
     class CalculationOperations
     {
-        private long _currentValue;
-        private long _currentValue2;
-        //   private string _operand;
-        private long _result;
-        private Stack<long> _history = new Stack<long>(); // Історія результатів для Undo
+        private double _currentValue;
+        private double _currentValue2;
+      
+        private double _result;
+        private Stack<double> _history = new Stack<double>(); // Історія результатів для Undo
 
 
-        public CalculationOperations(long initialValue, long initialValue2, long result)
+        public CalculationOperations(double initialValue, double initialValue2, double result)
         {
             _currentValue = initialValue;
             _currentValue2 = initialValue2;
-            // _operand = operand;
+          
             _result = result;
             
         }
-        /* public void SetOperand(double operand)
-         {
-             _operand = operand;
-         }*/
-
+        public void SetValues(double value1, double value2)
+        {
+            _currentValue = value1;
+            _currentValue2 = value2;
+        }
+      
         public void Addition()
         {
             SaveToHistory();
@@ -55,19 +56,26 @@ namespace Calculator
             return _currentValue2 != 0; // Повертає true, якщо дільник НЕ дорівнює 0
         }
 
-        public long GetResult()
+        public double GetResult()
         {
             return _result;
         }
-        public void SetResult(long value)
+        public void SetResult(double value)
         {
             _result = value;
         }
-        private void SaveToHistory()
+        public void SaveToHistory()
         {
             _history.Push(_result);
         }
-
+        public void ReturnPreviousValue()
+        {
+            if (_history.Count > 0)
+            {
+                _result = _history.Pop();
+            }
+        }
+       
 
     }
 }
